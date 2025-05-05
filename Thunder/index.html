@@ -1,11 +1,1076 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thunder Strykers Soccer Team</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Improved Color Scheme and Typography */
+        :root {
+            --primary: #004466;
+            --secondary: #ffa500;
+            --light: #f5f5f5;
+            --dark: #333;
+            --success: #28a745;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Header Section */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover, nav ul li a:focus {
+            color: var(--secondary);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('hero.jpg') no-repeat center center/cover;
+            color: var(--white);
+            padding: 6rem 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background-color: #e69500;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2em;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 0.5rem auto;
+        }
+
+        /* History Section */
+        .history-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem auto;
+        }
+
+        .history-image {
+            flex: 1 1 300px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .history-image:hover {
+            transform: scale(1.02);
+        }
+
+        .history-text {
+            flex: 2;
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Players Section */
+        #Roster {
+            background-color: var(--white);
+            padding: 3rem 1rem;
+        }
+
+        #toggleRoster {
+            margin: 1rem auto;
+            display: block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #toggleRoster:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .players-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .player-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .player-card h3 {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+            margin: 0;
+        }
+
+        .player-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .player-info {
+            padding: 1rem;
+        }
+
+        .player-info ul {
+            list-style: none;
+        }
+
+        .player-info li {
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .player-info li:last-child {
+            border-bottom: none;
+        }
+
+        .player-info strong {
+            color: var(--primary);
+        }
+
+        /* Events Section */
+        #events {
+            background-color: var(--light);
+            padding: 3rem 1rem;
+        }
+
+        .events-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .events-container ul {
+            list-style: none;
+        }
+
+        .events-container li {
+            background-color: var(--white);
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-left: 5px solid var(--secondary);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .event-date {
+            font-weight: bold;
+            color: var(--primary);
+            min-width: 120px;
+        }
+
+        .event-teams {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0.5rem 0;
+        }
+
+        .event-location {
+            color: #666;
+            font-style: italic;
+        }
+
+        .event-result {
+            font-weight: bold;
+            color: var(--success);
+            margin-left: 1rem;
+        }
+
+        /* Donations Section */
+        #donations {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        #donations h2 {
+            color: var(--white);
+        }
+
+        #donations h2::after {
+            background-color: var(--secondary);
+        }
+
+        #donations p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1em;
+        }
+
+        .donation-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.2);
+        }
+
+        .donate-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .donate-btn:hover {
+            background-color: #e69500;
+            transform: translateY(-2px);
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-option {
+            width: 50px;
+            height: 30px;
+            background-color: var(--white);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.2rem;
+        }
+
+        /* Gallery Section */
+        #gallery {
+            background-color: var(--white);
+            padding: 3rem 1rem;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 16/9;
+        }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img, .gallery-item:hover video {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--white);
+            padding: 0.5rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Newsletter Section */
+        #newsletter {
+            background-color: var(--secondary);
+            color: var(--white);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+        }
+
+        /* Sponsors Section */
+        #sponsors {
+            background-color: var(--light);
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        .sponsors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sponsor-item {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            max-width: 200px;
+        }
+
+        .sponsor-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .sponsor-item img {
+            max-width: 100%;
+            height: auto;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .sponsor-item:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 3rem 1rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .logo {
+                margin-bottom: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            nav ul li {
+                margin-left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .history-container {
+                flex-direction: column;
+            }
+
+            .players-container {
+                grid-template-columns: 1fr;
+            }
+
+            .events-container li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .event-teams {
+                text-align: left;
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-column {
+                margin-bottom: 1.5rem;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 4rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section h2 {
+                font-size: 1.8em;
+            }
+
+            .donation-form, .newsletter-form {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="/images/Logo.jpg" alt="Thunder Strykers Logo">
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul>
+                <li><a href="#history">History</a></li>
+                <li><a href="#Roster">Roster</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#donations">Donations</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Thunder Strykers</h1>
+        <p>Uniting the community through soccer</p>
+        <div class="hero-buttons">
+            <a href="#events" class="btn">View Schedule</a>
+            <a href="#donations" class="btn">Support Our Team</a>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="content-section">
+        <h2>About Us</h2>
+        <div class="history-container">
+            <img src="/images/tam-photo1.jpg" alt="Thunder Strykers Team Photo" class="history-image" loading="lazy">
+            <div class="history-text">
+                <p>
+                    The Thunder Strykers were founded in 2023 to bring people together through soccer. 
+                    Competing in local Mexican tournaments, we have quickly grown into a symbol of unity and teamwork, 
+                    proudly finishing second in our recent tournament. What began as a small group of passionate players 
+                    has evolved into a diverse team, representing various backgrounds, cultures, and ideas.
+                </p>
+                <p>
+                    The team was formed to provide a platform where community members could connect, share their love for 
+                    the sport, and inspire one another to grow both on and off the field. The Thunder Strykers have built a reputation for their sportsmanship, skill, and 
+                    dedication to the game through hard work, discipline, and unwavering determination.
+                </p>
+                <p>
+                    In our short time, we've fostered a competitive spirit and established friendships 
+                    and bonds that extend beyond the field. Whether it's the roar of the crowd during matches or the quiet 
+                    moments of teamwork during practice, Thunder Strykers have become more than just a soccer team — we are 
+                    a family united by our love for the game and our community.
+                </p>
+                <p>
+                    Looking forward, we aim to continue competing at higher levels, growing our team, and inspiring future 
+                    generations to pursue their passion for soccer while promoting unity, respect, and inclusivity within 
+                    the community.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Players Section -->
+    <section id="Roster" class="content-section">
+        <h2>2024-2025 Roster</h2>
+        <button id="toggleRoster" onclick="toggleRoster()">Show Roster</button>
+        <div id="roster" class="players-container" style="display: none;">
+            <div class="player-card">
+                <h3>Twahirwa Florene</h3>
+                <img src="/images/team-photo1.jpg" alt="Twahirwa Florene" loading="lazy">
+                <div class="player-info">
+                    <ul>
+                        <li><strong>Age:</strong> 24</li>
+                        <li><strong>Year Started:</strong> 2023</li>
+                        <li><strong>Shirt Number:</strong> 9</li>
+                        <li><strong>Height:</strong> 6'1" (185 cm)</li>
+                        <li><strong>Weight:</strong> 170 lbs (77 kg)</li>
+                        <li><strong>Position:</strong> Forward</li>
+                        <li><strong>Goals:</strong> 12</li>
+                        <li><strong>Assists:</strong> 8</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="player-card">
+                <h3>Jimmy</h3>
+                <img src="/images/team-photo2.jpg" alt="Jimmy" loading="lazy">
+                <div class="player-info">
+                    <ul>
+                        <li><strong>Age:</strong> 22</li>
+                        <li><strong>Year Started:</strong> 2023</li>
+                        <li><strong>Shirt Number:</strong> 10</li>
+                        <li><strong>Height:</strong> 5'9" (175 cm)</li>
+                        <li><strong>Weight:</strong> 160 lbs (72 kg)</li>
+                        <li><strong>Position:</strong> Midfielder</li>
+                        <li><strong>Goals:</strong> 5</li>
+                        <li><strong>Assists:</strong> 15</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="player-card">
+                <h3>Seth</h3>
+                <img src="/images/team-photo2.jpg" alt="Seth" loading="lazy">
+                <div class="player-info">
+                    <ul>
+                        <li><strong>Age:</strong> 26</li>
+                        <li><strong>Year Started:</strong> 2023</li>
+                        <li><strong>Shirt Number:</strong> 1</li>
+                        <li><strong>Height:</strong> 6'3" (190 cm)</li>
+                        <li><strong>Weight:</strong> 185 lbs (84 kg)</li>
+                        <li><strong>Position:</strong> Goalkeeper</li>
+                        <li><strong>Clean Sheets:</strong> 8</li>
+                        <li><strong>Saves:</strong> 42</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="player-card">
+                <h3>Patient</h3>
+                <img src="/images/team-photo1.jpg" alt="Patient" loading="lazy">
+                <div class="player-info">
+                    <ul>
+                        <li><strong>Age:</strong> 25</li>
+                        <li><strong>Year Started:</strong> 2023</li>
+                        <li><strong>Shirt Number:</strong> 5</li>
+                        <li><strong>Height:</strong> 5'11" (180 cm)</li>
+                        <li><strong>Weight:</strong> 175 lbs (79 kg)</li>
+                        <li><strong>Position:</strong> Defender</li>
+                        <li><strong>Tackles:</strong> 56</li>
+                        <li><strong>Interceptions:</strong> 32</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="content-section">
+        <h2>Upcoming Matches & Results</h2>
+        <div class="events-container">
+            <h3>Next Match</h3>
+            <ul>
+                <li>
+                    <div class="event-date">May 15, 2024</div>
+                    <div class="event-teams">Thunder Strykers vs Lexington Congolese</div>
+                    <div class="event-location">Lexington Soccer Complex, Field 3</div>
+                    <div class="event-time">7:30 PM</div>
+                </li>
+            </ul>
+            
+            <h3>Upcoming Schedule</h3>
+            <ul>
+                <li>
+                    <div class="event-date">June 2, 2024</div>
+                    <div class="event-teams">Thunder Strykers vs Young Stars</div>
+                    <div class="event-location">Community Park, Main Field</div>
+                    <div class="event-time">5:00 PM</div>
+                </li>
+                <li>
+                    <div class="event-date">June 20, 2024</div>
+                    <div class="event-teams">Thunder Strykers vs West Indies</div>
+                    <div class="event-location">Regional Sports Center</div>
+                    <div class="event-time">8:00 PM</div>
+                </li>
+            </ul>
+            
+            <h3>Recent Results</h3>
+            <ul>
+                <li>
+                    <div class="event-date">April 28, 2024</div>
+                    <div class="event-teams">Thunder Strykers 3 - 1 City Rivals</div>
+                    <div class="event-result">WIN</div>
+                </li>
+                <li>
+                    <div class="event-date">April 15, 2024</div>
+                    <div class="event-teams">Thunder Strykers 2 - 2 United FC</div>
+                    <div class="event-result">DRAW</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Donations Section -->
+    <section id="donations" class="content-section">
+        <h2>Support Thunder Strykers</h2>
+        <p>Your donations help us grow and continue competing in tournaments. Thank you for your support!</p>
+        
+        <div class="donation-form">
+            <form id="donationForm" onsubmit="processDonation(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">Donation Amount ($)</label>
+                    <input type="number" id="amount" name="amount" class="form-control" min="5" step="5" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message (Optional)</label>
+                    <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <div class="payment-options">
+                        <div class="payment-option">
+                            <i class="fab fa-cc-visa" style="color: #1a1f71;"></i>
+                        </div>
+                        <div class="payment-option">
+                            <i class="fab fa-cc-mastercard" style="color: #eb001b;"></i>
+                        </div>
+                        <div class="payment-option">
+                            <i class="fab fa-cc-paypal" style="color: #00457C;"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="donate-btn">Donate Now</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="content-section">
+        <h2>Team Photos & Videos</h2>
+        <div class="gallery-container">
+            <div class="gallery-item">
+                <img src="/images/team-photo2.jpg" alt="Team celebrating a goal" loading="lazy">
+                <div class="gallery-caption">Celebrating our first tournament win</div>
+            </div>
+            <div class="gallery-item">
+                <img src="/images/team-photo1.jpg" alt="Team group photo" loading="lazy">
+                <div class="gallery-caption">2024 Team Photo</div>
+            </div>
+            <div class="gallery-item">
+                <video controls>
+                    <source src="/images/video1.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="gallery-caption">Highlights from last match</div>
+            </div>
+            <div class="gallery-item">
+                <img src="/images/Team.jpg" alt="Team training session" loading="lazy">
+                <div class="gallery-caption">Weekly training session</div>
+            </div>
+            <div class="gallery-item">
+                <img src="/images/team-photo1.jpg" alt="Match action shot" loading="lazy">
+                <div class="gallery-caption">Match action against City Rivals</div>
+            </div>
+            <div class="gallery-item">
+                <video controls>
+                    <source src="/images/video2.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="gallery-caption">Tournament celebration</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="content-section">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter for match updates, team news, and community events</p>
+        
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" class="btn">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="content-section">
+        <h2>Our Sponsors</h2>
+        <p>We're grateful for the support of these local businesses</p>
+        
+        <div class="sponsors-grid">
+            <div class="sponsor-item">
+                <img src="/images/Logo.jpg" alt="Local Sports Shop" loading="lazy">
+            </div>
+            <div class="sponsor-item">
+                <img src="/images/Logo.jpg" alt="Community Bank" loading="lazy">
+            </div>
+            <div class="sponsor-item">
+                <img src="/images/Logo.jpg" alt="Fitness Center" loading="lazy">
+            </div>
+            <div class="sponsor-item">
+                <img src="/images/team-photo1.jpg" alt="Family Restaurant" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Thunder Strykers</h3>
+                <p>Bringing the community together through soccer since 2023</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/ThunderStrykers" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/thunder_strykers" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.twitter.com/ThunderStrykers" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com/ThunderStrykers" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#history">About Us</a></li>
+                    <li><a href="#Roster">Team Roster</a></li>
+                    <li><a href="#events">Match Schedule</a></li>
+                    <li><a href="#gallery">Photo Gallery</a></li>
+                    <li><a href="#donations">Support Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contact@thunderstrykers.com</li>
+                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Lexington, KY</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 Thunder Strykers Soccer Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Toggle roster visibility
+        function toggleRoster() {
+            const roster = document.getElementById("roster");
+            const button = document.getElementById("toggleRoster");
+
+            if (roster.style.display === "none") {
+                roster.style.display = "grid";
+                button.textContent = "Hide Roster";
+            } else {
+                roster.style.display = "none";
+                button.textContent = "Show Roster";
+            }
+        }
+
+        // Process donation form
+        function processDonation(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const amount = document.getElementById("amount").value;
+            
+            // Here you would typically send this data to a server
+            // For now, we'll just show a thank you message
+            alert(`Thank you, ${name}, for your donation of $${amount}! We've sent a confirmation to ${email}.`);
+            
+            // Reset form
+            document.getElementById("donationForm").reset();
+        }
+
+        // Subscribe to newsletter
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector("input").value;
+            
+            alert(`Thank you for subscribing with ${email}! You'll receive our next newsletter.`);
+            event.target.reset();
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+        const nav = document.querySelector("nav ul");
+
+        mobileMenuBtn.addEventListener("click", () => {
+            nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+        });
+
+        // Responsive check
+        function checkScreenSize() {
+            if (window.innerWidth <= 768) {
+                nav.style.display = "none";
+                mobileMenuBtn.style.display = "block";
+            } else {
+                nav.style.display = "flex";
+                mobileMenuBtn.style.display = "none";
+            }
+        }
+
+        // Run on load and resize
+        window.addEventListener("load", checkScreenSize);
+        window.addEventListener("resize", checkScreenSize);
+    </script>
 </body>
 </html>
